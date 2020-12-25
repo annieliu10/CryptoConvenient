@@ -9,6 +9,7 @@ headers = {
   'X-CMC_PRO_API_KEY': 'a0b47712-6af4-494c-88f6-b47417d2d024',
 }
 
+
 session = Session()
 session.headers.update(headers)
 
@@ -41,7 +42,6 @@ last_updated = results['data']['last_updated']
 
 ##careful: cannot combine string and int tgt
 print("There are currently " + formatTheStrings(active_currencies) + "active currencies and a total of " + formatTheStrings(total_cyrprocurrencies)+ " currencies")
-
 print("There are currently "+ formatTheStrings(active_marketPairs) + " active markets")
 print("The bit coin dominance percentage in the market is " + formatTheStrings(btc_dominance))
 print("The bitcoin market cap is "+ formatTheStrings(altcoin_market_cap) + " and the bitcoin volume in the last 24 hours is " + formatTheStrings(altcoin_volume_24h))

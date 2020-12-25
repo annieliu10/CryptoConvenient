@@ -141,7 +141,7 @@ while True:
             if prices >= float(alertAmount) and symbolName not in already_hit:
                 os.system("say " + name + "hit" + alertAmount)
                 last_updated_formatted = datetime.fromtimestamp(last_updated).strftime('%B, %D, %Y at %I:%M%p')
-                print (name + "hit" + alertAmount + "on" + last_updated_formatted)
+                print (name + " hit " + alertAmount + " on " + last_updated_formatted)
                 already_hit.append(symbolName)
     print("it is still running...")
     time.sleep(600)

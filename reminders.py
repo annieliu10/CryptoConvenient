@@ -65,7 +65,7 @@ def make_public_reminder(reminder):
     newreminder={}
     for field in reminder:
         if field == 'id':
-            newreminder['uri']= url_for('get_reminders', reminder_id=reminder['id'], _external=True)
+            newreminder['uri']= url_for('get_specific_reminder', reminders_id=reminder['id'], _external=True)
         else:
             newreminder[field] = reminder[field]
     return newreminder
@@ -75,7 +75,7 @@ def make_public_reminder(reminder):
 
 ## get reminders that have the same id//category 
 @reminder.route('/reminder/api/v1.0/reminders/<int:reminders_categ>', methods = ['GET'])
-@auth.login_required
+
 def get_specific_reminders(reminders_categ):
     ## only keep the tasks that have the associated id 
     specificreminders = filter(lambda reminder: reminder['categ'] == reminders_categ, reminders)
@@ -86,7 +86,7 @@ def get_specific_reminders(reminders_categ):
 
 
 @reminder.route('/reminder/api/v1.0/reminders/<int:reminders_id>', methods = ['GET'])
-@auth.login_required
+
 def get_specific_reminder(reminders_id):
 
     for each_reminder in reminders:
@@ -138,7 +138,7 @@ def delete_categ(reminders_categ):
 
 
 @reminder.route('/reminder/api/v1.0/reminders/<int:reminders_id>', methods = ['PUT'])
-@auth.login_required
+
 def update_reminder(reminders_id):
     theone = {}
     for each_ele in reminders:

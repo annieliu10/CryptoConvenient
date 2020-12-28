@@ -169,11 +169,16 @@ def notfound(error):
     return make_response(jsonify({'error': "Not found oop"}), 404)
 
 
-
+@reminder.errorhandler(400)
+def notworking(error):
+    return make_response(jsonify({'error': "Not working"}), 400)
 
 
 if __name__ == "__main__":
     reminder.run(debug=True)
+
+
+
 
 
 

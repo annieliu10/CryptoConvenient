@@ -5,7 +5,7 @@ import re
 from datetime import datetime 
 from prettytable import PrettyTable
 from colorama import Fore, Back, Style
-import time 
+import time  
 
 
 url = "https://min-api.cryptocompare.com/data/top/totalvolfull"
@@ -143,5 +143,6 @@ while True:
                 last_updated_formatted = datetime.fromtimestamp(last_updated).strftime('%B, %D, %Y at %I:%M%p')
                 print (name + " hit " + alertAmount + " on " + last_updated_formatted)
                 already_hit.append(symbolName)
+
     print("it is still running...")
     time.sleep(600)

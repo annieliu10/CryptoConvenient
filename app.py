@@ -29,8 +29,8 @@ reminders = [
 {
 'categ': 1,
 'id': 1,
-'title': "Trade the coin",
-'description': "Trade BTC",
+'title': "Sell the coin",
+'description': "Sell BTC",
 'completed' : False
 },
 {
@@ -99,14 +99,19 @@ def get_specific_reminder(reminders_id):
 @reminder.route('/reminder/api/v1.0/reminders', methods=['POST'])
 def make_new_reminder():
     #request.json has the requested data 
-    if not request.json or not 'title' in request.json and not 'categ' in request.json:
+    if not request.json or not 'description' in request.json or not 'categ' in request.json:
         abort(400)
+    title = ""
+    if request.json['categ']== 1:
+        title = "Sell the coin"
+    elif request.json['categ']== 2:
+        title = "Buy the coin"
     reminder = {
         'categ': request.json['categ'],
         'id': reminders[-1]['id']+1,
-        'title': request.json['title'],
+        'title': title
         ## second argument in the description: what you would replace it with if there isn't a description
-        'description': request.json.get('description', ""),
+        'description': request.json['description'],
         'completed': False
     }
     reminders.append(reminder)

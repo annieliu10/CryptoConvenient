@@ -1,9 +1,4 @@
-from flask import Flask
-from flask import jsonify
-from flask import abort 
-from flask import make_response
-from flask import request
-from flask import url_for
+from flask import Flask, jsonify, abort, make_response, url_for, request
 from flask_httpauth import HTTPBasicAuth
 
 

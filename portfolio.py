@@ -56,8 +56,6 @@ def userInputForPortfolio():
     alert_file.close()
 
 
-
-
 portfolio_value = 0.00
 last_updated = 0
 
@@ -168,23 +166,89 @@ def alertSys():
 
 
 
-## user terminal commands
+## user terminal command
 def init():
     print ("Choose an option")
+
     portfolio = "P - set up a personal portfolio of the bitcoins you are willing to purchase"
+
     setup = "S - set up an alert system and post it to reminders for trading the coins"
+    
     marking = "M - mark a reminder as completed"
+
     delete= "D - delete a reminder"
+
+    deleteAll = "DA - delete all reminders"
+
+    deleteACateg = "DC - delete either buy or sell"
+
     updateBuyOrSell = "U- update the reminder"
-   
+
+    print (portfolio, setup, marking, delete, deleteAll, updateBuyOrSell)
 
 
+    userInput = input()
+
+    if userInput == "P":
+        createTable()
+    elif userInput == "S":
+        alertSys()
+    elif userInput == "M":
+        reminderID = input("What is the ID of the reminder you want to update? ")
+        markAsCompleted(reminderID)
+    elif userInput == "D":
+        reminder = input("What is the ID of the reminder you want to delete? ")
+        deleteAReminder(reminder)
+    elif userInput == "DA":
+        deleteAlll()
+    elif userInput == "DC":
+        categNum = input("What is the number id of the category you want to delete? ")
+        deleteCateg(categNum)
+        
+    elif userInput == "U":
+        reminderId = input("What is the id of the reminder you would like to update")
+        userInput = input("What would you like to update: d for the description, cc for the category of buy or sell, c for the completed")
+        actualContent = input("What's the content you want to update? ")
+        updateAReminder(userInput, actualContent, reminderId)
 
 
-createTable()
+def markAsCompleted(reminderID):
+    urlm = "https://radiant-taiga-62801.herokuapp.com/reminder/api/v1.0/reminders/" + reminderID
+    json_object = {"completed": True}
+    postToIt = requests.post(urlm, data = json_object)
+    print (json.dumps(postToIt, sort_keys=True, indent=4))
+    
 
 
+def deleteAReminder(reminder):
+    urld = "https://radiant-taiga-62801.herokuapp.com/reminder/api/v1.0/reminders/" + reminder
+    deleting = requests.delete(urld)
+    print (json.dumps(deleting, sort_keys=True, indent = 4))
 
+
+def updateAReminder(choice, actualContent, reminderId):
+    urlu= "https://radiant-taiga-62801.herokuapp.com/reminder/api/v1.0/reminders/"
+    sentItem = {}
+    if choice == "d":
+        sentItem = {'description': actualContent}
+    elif choice == "cc":
+        sentItem = {'categ': actualContent}
+    elif choice == "c":
+        sentItem = {'completed': actualContent}
+    updating= requests.put(urlu, data = sentItem)
+    print (json.dumps(updating, sort_keys= True, indent = 4))
+
+
+def deleteAlll():
+    urlm= "https://radiant-taiga-62801.herokuapp.com/reminder/api/v1.0/reminders/"
+    deleteAlll = requests.delete(urlm)
+    print (json.dumps(deleteAlll, sort_keys=True, indent=4))
+
+
+def deleteCateg(categNum):
+    urlc= "https://radiant-taiga-62801.herokuapp.com/reminder/api/v1.0/reminders/"
+    urlc += categNum
+    deleteCATEG = requests.delete(urlc)
 
 
 

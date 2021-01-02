@@ -109,7 +109,7 @@ def make_new_reminder():
     reminder = {
         'categ': request.json['categ'],
         'id': reminders[-1]['id']+1,
-        'title': title
+        'title': title,
         ## second argument in the description: what you would replace it with if there isn't a description
         'description': request.json['description'],
         'completed': False
@@ -151,9 +151,7 @@ def update_reminder(reminders_id):
             theone = each_ele
     if not request.json:
         abort(400)
-        ## when "title" is in the json data but its value is not in string 
-    if 'title' in request.json and type(request.json['title']) is not str:
-        abort(400)
+        ## when "description" is in the json data but its value is not in string
     if 'description' in request.json and type(request.json['description']) is not str:
         abort(400)
     if 'completed' in request.json and type(request.json['completed']) is not bool:
@@ -163,10 +161,14 @@ def update_reminder(reminders_id):
 
 
     ##change it, or default 
-    theone['title']=  request.json.get('title', theone['title'])
-    theone['description']= request.json.get('description', theone['description'])
+    
+    theone['description'] =request.json.get('description', theone['description'])
     theone['completed']= request.json.get('completed', theone['completed'])
     theone['categ'] = request.json.get('categ', theone['completed'])
+    if theone['categ']==1:
+        theone['title']= "Sell the coin"
+    elif theone['categ']==2:
+        theone['title']= "Buy the coin"
     return jsonify({'reminder': theone})
 
 @reminder.errorhandler(404)

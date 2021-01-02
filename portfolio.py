@@ -249,6 +249,7 @@ def deleteCateg(categNum):
     urlc= "https://radiant-taiga-62801.herokuapp.com/reminder/api/v1.0/reminders/"
     urlc += categNum
     deleteCATEG = requests.delete(urlc)
+    print (json.dumps(deleteCATEG, sort_keys=True, indent=4))
 
 
 

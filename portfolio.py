@@ -184,7 +184,7 @@ def init():
 
     updateBuyOrSell = "U- update the reminder"
 
-    print (portfolio, setup, marking, delete, deleteAll, updateBuyOrSell)
+    print (portfolio, setup, marking, delete, deleteAll, deleteACateg, updateBuyOrSell)
 
 
     userInput = input()
@@ -242,7 +242,8 @@ def updateAReminder(choice, actualContent, reminderId):
 def deleteAlll():
     urlm= "https://radiant-taiga-62801.herokuapp.com/reminder/api/v1.0/reminders/"
     deleteAlll = requests.delete(urlm)
-    print (json.dumps(deleteAlll, sort_keys=True, indent=4))
+    print (json.dumps(deleteAlll, 
+    sort_keys=True, indent=4))
 
 
 def deleteCateg(categNum):
